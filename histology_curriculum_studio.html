@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>استوديو الهستولوجي</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --panel: rgba(255, 251, 245, 0.9);
+      --ink: #193236;
+      --muted: #5b6d71;
+      --teal: #0f8b8d;
+      --deep: #145b62;
+      --sand: #e8c27a;
+      --coral: #df7c60;
+      --line: rgba(20, 91, 98, 0.13);
+      --shadow: 0 18px 48px rgba(16, 54, 60, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Candara, "Trebuchet MS", Tahoma, sans-serif;
+      color: var(--ink);
+      text-align: start;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(223,124,96,.16), transparent 22rem),
+        radial-gradient(circle at 85% 15%, rgba(15,139,141,.15), transparent 18rem),
+        linear-gradient(180deg, #fbf7f0, #eef1ec);
+    }
+
+    img { display: block; max-width: 100%; }
+    .page { width: min(1120px, calc(100% - 28px)); margin: 20px auto 36px; }
+    .toolbar, .hero, section, .lightbox-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
+
+    .toolbar-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #edf7f6;
+      color: var(--deep);
+      font-size: .92rem;
+    }
+
+    .lang-toggle {
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      padding: 10px 16px;
+      border-radius: 999px;
+      color: white;
+      background: linear-gradient(135deg, var(--teal), var(--deep));
+      transition: transform .18s ease;
+    }
+
+    .lang-toggle:hover,
+    .lang-toggle:focus-visible { transform: translateY(-2px); }
+
+    .hero {
+      padding: 28px;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(232,194,122,.22), transparent 18rem),
+        linear-gradient(135deg, rgba(20,91,98,.96), rgba(25,50,54,.96));
+      color: white;
+    }
+
+    .hero-grid, .module-wrap, .gallery-grid, .lab-wrap, .review-wrap, .stats, .gallery-stack, .explorer-layout, .explorer-stats {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-grid { grid-template-columns: 1.35fr .9fr; margin-top: 16px; }
+    .module-wrap { grid-template-columns: .92fr 1.18fr; }
+    .lab-wrap, .review-wrap { grid-template-columns: 1.1fr .9fr; }
+    .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    .gallery-stack { gap: 14px; }
+    .stats { grid-template-columns: repeat(4, 1fr); margin-top: 16px; }
+    .explorer-layout { grid-template-columns: 1fr; }
+    .explorer-stats { grid-template-columns: repeat(3, 1fr); }
+    .mindmap-shell {
+      position: relative;
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(232,194,122,.16), transparent 16rem),
+        linear-gradient(180deg, rgba(229,243,241,.65), rgba(255,255,255,.96));
+      overflow: hidden;
+    }
+    .mindmap-core {
+      width: min(360px, 100%);
+      margin: 0 auto;
+      padding: 24px;
+      border-radius: 24px;
+      text-align: center;
+      color: white;
+      background: linear-gradient(135deg, var(--deep), #244b52);
+      box-shadow: 0 16px 34px rgba(20, 91, 98, 0.24);
+      position: relative;
+      z-index: 1;
+    }
+    .mindmap-core::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 28px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(20,91,98,.9), rgba(20,91,98,.12));
+    }
+    .mindmap-core p {
+      margin: 10px 0 0;
+      color: rgba(255,255,255,.84);
+      line-height: 1.8;
+    }
+    .mindmap-tree {
+      margin-top: 54px;
+      display: grid;
+      gap: 42px;
+      position: relative;
+    }
+    .mindmap-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      position: relative;
+    }
+    .mindmap-row::before {
+      content: "";
+      position: absolute;
+      top: -26px;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(20,91,98,.18), rgba(20,91,98,.52), rgba(20,91,98,.18));
+    }
+    .mind-branch {
+      position: relative;
+      width: 100%;
+      text-align: start;
+      border: 1px solid var(--line);
+      background: #fffdfa;
+      border-radius: 20px;
+      padding: 18px;
+      min-height: 178px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .mind-branch::before {
+      content: "";
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 26px;
+      border-radius: 999px;
+      background: rgba(20,91,98,.34);
+    }
+    .mindmap-row.top .mind-branch::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 42px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(20,91,98,.34), rgba(20,91,98,.18));
+    }
+    .mind-branch:hover,
+    .mind-branch:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(15,139,141,.34);
+      box-shadow: 0 16px 28px rgba(20, 91, 98, 0.10);
+    }
+    .mind-branch.active {
+      background: linear-gradient(180deg, #fbffff, #edf8f7);
+      border-color: rgba(15,139,141,.42);
+      box-shadow: 0 18px 32px rgba(15,139,141,.12);
+    }
+    .mind-branch small {
+      display: inline-flex;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #edf7f6;
+      color: var(--deep);
+      margin-bottom: 10px;
+    }
+    .mind-branch h3 {
+      font-size: 1.04rem;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+    .mind-branch ul {
+      margin: 0;
+      padding-inline-start: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: .95rem;
+    }
+    .mindmap-hint {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .eyebrow, .badge, .chip, .gallery-tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: .9rem;
+    }
+
+    .eyebrow { background: rgba(255,255,255,.12); }
+    .badge { background: #fff4df; color: #8c5c19; }
+    .chip, .gallery-tag { background: #e5f3f1; color: var(--deep); }
+
+    h1, h2, h3 { margin: 0; line-height: 1.2; }
+    p { line-height: 1.85; }
+    .hero p, .panel-note { color: rgba(255,255,255,.82); }
+
+    .actions, .flash-actions, .quiz-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font: inherit;
+      text-decoration: none;
+      transition: transform .18s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn:hover, .btn:focus-visible { transform: translateY(-2px); }
+    .btn.primary { background: linear-gradient(135deg, #f0d091, #d59a4b); color: #17262a; }
+    .btn.secondary { background: rgba(255,255,255,.1); color: white; border: 1px solid rgba(255,255,255,.16); }
+    .btn.ghost { background: white; color: var(--ink); border: 1px solid var(--line); }
+
+    .panel, .card, .detail, .quiz-box, .flash-box, .tips, .gallery-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px;
+    }
+
+    .panel { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.12); }
+    .stat strong { display: block; font-size: 1.8rem; color: var(--deep); }
+    .stat span, .module-btn p, .detail p, .tip, .flash-meta, .feedback, .quiz-result, footer, .gallery-copy p, .gallery-note { color: var(--muted); }
+
+    section { margin-top: 22px; padding: 26px; }
+    .head { display: flex; justify-content: space-between; gap: 14px; margin-bottom: 18px; align-items: end; }
+    .head p { margin: 8px 0 0; color: var(--muted); }
+    .module-list, .options, .tips-list, .quiz-list { display: grid; gap: 10px; }
+
+    .module-btn, .option {
+      width: 100%;
+      text-align: start;
+      border-radius: 18px;
+      padding: 14px 16px;
+      font: inherit;
+      border: 1px solid var(--line);
+      background: #fffdfa;
+      cursor: pointer;
+    }
+
+    .module-btn.active { background: linear-gradient(180deg, #fbffff, #edf8f7); border-color: rgba(15,139,141,.34); }
+    .module-btn small { display: inline-block; margin-bottom: 8px; color: var(--deep); background: #e5f3f1; padding: 4px 10px; border-radius: 999px; }
+    .detail { background: linear-gradient(180deg, rgba(229,243,241,.72), rgba(255,255,255,.92)); min-height: 360px; }
+    .detail h3 { color: var(--deep); margin: 8px 0; }
+    .focus { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 14px; }
+    .focus div, .tip, .step { border-radius: 16px; padding: 12px 14px; background: #fff; border: 1px solid var(--line); }
+    .focus div strong { display: block; color: var(--deep); margin-bottom: 6px; }
+    .focus div span { display: block; color: var(--muted); line-height: 1.75; }
+
+    .gallery-card { padding: 14px; display: grid; gap: 12px; }
+    .gallery-media {
+      border: none;
+      padding: 0;
+      background: #f8fbfa;
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: zoom-in;
+      border: 1px solid var(--line);
+    }
+
+    .gallery-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .gallery-copy { display: grid; gap: 8px; }
+    .gallery-copy p { margin: 0; }
+    .gallery-note { font-size: .92rem; }
+    .gallery-links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .gallery-links a {
+      color: var(--deep);
+      text-decoration: none;
+      font-size: .92rem;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #edf7f6;
+      border: 1px solid rgba(20, 91, 98, 0.12);
+    }
+    .gallery-subhead {
+      display: grid;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .gallery-filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .gallery-subhead p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .mini-stat {
+      padding: 16px 18px;
+    }
+    .mini-stat strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--deep);
+    }
+    .search-wrap {
+      display: grid;
+      gap: 8px;
+    }
+    .search-wrap span {
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .search-wrap input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      font: inherit;
+      background: #fffdfa;
+      color: var(--ink);
+    }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .chapter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .chapter-pill {
+      border: 1px solid var(--line);
+      background: #fffdfa;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: inherit;
+      cursor: pointer;
+    }
+    .chapter-pill.active {
+      background: linear-gradient(180deg, #fbffff, #edf8f7);
+      border-color: rgba(15,139,141,.34);
+      color: var(--deep);
+    }
+    .chapter-list, .slide-grid, .excerpt-list {
+      display: grid;
+      gap: 12px;
+    }
+    .chapter-list {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .chapter-card, .slide-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fffdfa;
+      padding: 14px 16px;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+      text-align: start;
+      cursor: pointer;
+      display: grid;
+      gap: 8px;
+    }
+    .chapter-card:hover,
+    .chapter-card:focus-visible,
+    .slide-card:hover,
+    .slide-card:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(15,139,141,.28);
+      box-shadow: 0 14px 28px rgba(20, 91, 98, 0.08);
+    }
+    .chapter-card.active,
+    .slide-card.active {
+      background: linear-gradient(180deg, #fbffff, #edf8f7);
+      border-color: rgba(15,139,141,.38);
+      box-shadow: 0 16px 30px rgba(15,139,141,.10);
+    }
+    .chapter-card small,
+    .slide-card small {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 2px;
+      color: var(--deep);
+      background: #e5f3f1;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .chapter-card h3,
+    .slide-card h3 {
+      margin: 0;
+      color: var(--ink);
+    }
+    .chapter-meta,
+    .slide-meta,
+    .slide-detail-top,
+    .slide-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .chapter-meta,
+    .slide-meta {
+      margin-top: 10px;
+    }
+    .chapter-card p,
+    .slide-card p,
+    .explorer-status,
+    .slide-detail p {
+      color: var(--muted);
+    }
+    .chapter-card p,
+    .slide-card p {
+      margin: 0;
+      line-height: 1.75;
+    }
+    .keyword-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .explorer-main { align-items: start; }
+    .explorer-preview {
+      display: grid;
+      gap: 14px;
+    }
+    .explorer-status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .slide-grid {
+      grid-template-columns: 1fr;
+      max-height: 760px;
+      overflow: auto;
+      padding-inline-end: 4px;
+    }
+    .slide-card {
+      width: 100%;
+    }
+    .slide-card h3 {
+      font-size: 1rem;
+    }
+    .slide-card p {
+      margin: 0;
+      line-height: 1.75;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+    }
+    .slide-page {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #edf7f6;
+      color: var(--deep);
+      font-size: .9rem;
+    }
+    .slide-detail {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(229,243,241,.72), rgba(255,255,255,.96));
+    }
+    .slide-detail-body,
+    .detail-section {
+      display: grid;
+      gap: 10px;
+    }
+    .detail-section {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.84);
+      border: 1px solid var(--line);
+    }
+    .detail-section-label {
+      font-size: .83rem;
+      font-weight: 700;
+      color: var(--deep);
+    }
+    #slideDetailTitle {
+      font-size: 1.1rem;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    #slideDetailPreview {
+      margin: 0;
+      color: var(--deep);
+      line-height: 1.85;
+    }
+    .excerpt-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      max-height: 300px;
+      overflow: auto;
+    }
+    .excerpt-item {
+      position: relative;
+      padding: 0 0 12px 18px;
+      border-bottom: 1px dashed rgba(20, 91, 98, 0.18);
+      color: var(--muted);
+      line-height: 1.9;
+      background: transparent;
+    }
+    .excerpt-item::before {
+      content: "";
+      position: absolute;
+      top: .8em;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(15,139,141,.34);
+    }
+    .excerpt-item:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .slide-visual {
+      overflow: hidden;
+    }
+    .slide-visual img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      border-radius: 16px;
+      background: #f8fbfa;
+      border: 1px solid rgba(20, 91, 98, 0.08);
+    }
+    .empty-state {
+      border: 1px dashed rgba(20,91,98,.22);
+      border-radius: 20px;
+      padding: 22px;
+      background: #fffdfa;
+      color: var(--muted);
+      text-align: center;
+    }
+    .compare-shell,
+    .classifier-shell,
+    .compare-panel,
+    .compare-selects,
+    .compare-groups {
+      display: grid;
+      gap: 16px;
+    }
+    .compare-groups {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    .compare-tab {
+      border: 1px solid var(--line);
+      background: #fffdfa;
+      border-radius: 18px;
+      padding: 14px 16px;
+      font: inherit;
+      text-align: start;
+      cursor: pointer;
+      color: var(--ink);
+    }
+    .compare-tab.active {
+      background: linear-gradient(180deg, #fbffff, #edf8f7);
+      border-color: rgba(15,139,141,.34);
+      box-shadow: 0 14px 28px rgba(15,139,141,.08);
+    }
+    .compare-tab small {
+      display: block;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+    .compare-selects {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .compare-selects select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      font: inherit;
+      background: #fffdfa;
+      color: var(--ink);
+    }
+    .compare-panel {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .compare-card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 20px;
+      background: linear-gradient(180deg, rgba(229,243,241,.62), rgba(255,255,255,.96));
+      display: grid;
+      gap: 14px;
+    }
+    .compare-card h3 {
+      color: var(--deep);
+    }
+    .compare-facts {
+      display: grid;
+      gap: 10px;
+    }
+    .compare-fact {
+      border-radius: 16px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+    }
+    .compare-fact strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .compare-fact p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .classifier-shell {
+      grid-template-columns: 1.05fr .95fr;
+    }
+    .classifier-path {
+      min-height: 56px;
+    }
+    .result-box {
+      margin-top: 16px;
+      border-radius: 20px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(237,247,246,.92));
+      border: 1px solid var(--line);
+    }
+    .result-box h4 {
+      margin: 16px 0 10px;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+    .path-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #edf7f6;
+      color: var(--deep);
+      border: 1px solid rgba(20,91,98,.12);
+    }
+    .pending-box {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 18px; }
+    .step { color: #63777b; }
+    .step.active { background: linear-gradient(135deg, var(--teal), var(--deep)); color: white; border-color: transparent; }
+    .step.done { background: #dff2ef; color: var(--deep); }
+    .option.correct { background: #e7faf5; border-color: rgba(15,139,141,.36); }
+    .option.wrong { background: #fff0ea; border-color: rgba(223,124,96,.36); }
+
+    .bar { height: 10px; background: #ebefee; border-radius: 999px; overflow: hidden; margin-top: 14px; }
+    .bar span { display: block; height: 100%; width: 0; background: linear-gradient(135deg, var(--teal), var(--coral)); transition: width .24s ease; }
+    .feedback { line-height: 1.85; }
+    .feedback strong { display: block; color: var(--deep); margin-bottom: 4px; }
+
+    .flash-card {
+      min-height: 240px;
+      border-radius: 22px;
+      padding: 22px;
+      color: white;
+      background: linear-gradient(145deg, #17383e, #214b52);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .flash-toolbar {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .flash-status {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+    .flash-face { font-size: 1.18rem; line-height: 1.9; margin-top: 16px; }
+    .quiz-item { display: grid; gap: 12px; }
+    .quiz-item h3 { margin: 0; font-size: 1.02rem; }
+    .quiz-result { display: none; margin-top: 14px; padding: 14px; border-radius: 16px; background: #f2fbfa; border: 1px solid rgba(15,139,141,.14); }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 25, .68);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 20;
+    }
+
+    .lightbox.open { display: flex; }
+    .lightbox-panel {
+      width: min(1000px, calc(100% - 12px));
+      padding: 16px;
+      background: rgba(255,255,255,.96);
+    }
+
+    .lightbox-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .lightbox-close {
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #edf7f6;
+      color: var(--deep);
+    }
+
+    .lightbox-image {
+      width: 100%;
+      max-height: 72vh;
+      object-fit: contain;
+      border-radius: 18px;
+      background: #f8fbfa;
+    }
+
+    footer { padding: 16px 2px 2px; text-align: center; }
+
+    @media (max-width: 1180px) {
+      .explorer-layout { grid-template-columns: 1fr; }
+      .slide-grid { max-height: none; }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .module-wrap, .gallery-grid, .lab-wrap, .review-wrap, .stats, .mindmap-row, .explorer-layout, .explorer-stats, .slide-grid, .compare-selects, .compare-panel, .classifier-shell { grid-template-columns: 1fr; }
+      .focus { grid-template-columns: 1fr; }
+      .mindmap-row::before,
+      .mindmap-core::after,
+      .mind-branch::before,
+      .mindmap-row.top .mind-branch::after { display: none; }
+      .mindmap-tree { margin-top: 18px; gap: 16px; }
+    }
+
+    @media (max-width: 640px) {
+      .page { width: min(100% - 16px, 100%); }
+      .toolbar, .hero, section { padding: 18px; border-radius: 24px; }
+      .lightbox { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="toolbar">
+      <div class="toolbar-pill" id="toolbarPill">نسخة عربية مع تبديل إنجليزي</div>
+      <button class="lang-toggle" id="langToggle" type="button">English</button>
+    </div>
+
+    <header class="hero">
+      <div class="eyebrow" id="eyebrow">مبني على الموضوعات التي ظهرت في ملف الهستولوجي</div>
+      <div class="hero-grid">
+        <div>
+          <h1 id="heroTitle">استوديو الهستولوجي</h1>
+          <p id="heroIntro">أداة مذاكرة تفاعلية تجمع بين وحدات المنهج، بنك صور أوضح من الرسومات المختصرة، محاكاة المختبر، وبطاقات مراجعة واختبار سريع.</p>
+          <div class="actions">
+            <a class="btn primary" href="#curriculumExplorer" id="ctaModules">المنهج الكامل</a>
+            <a class="btn secondary" href="#gallery" id="ctaGallery">بنك الصور</a>
+            <a class="btn secondary" href="#lab" id="ctaLab">المختبر</a>
+            <a class="btn secondary" href="#quiz" id="ctaQuiz">الاختبار</a>
+          </div>
+        </div>
+        <div class="panel">
+          <h2 id="coverTitle" style="font-size:1.08rem;">ما الذي يغطيه؟</h2>
+          <div class="tips-list" style="margin-top:14px;">
+            <div class="tip panel-note" id="coverTip1">الخلية، المجهر، تحضير الأنسجة، الطرق الخاصة، الظهاري والغدد.</div>
+            <div class="tip panel-note" id="coverTip2">رسومات أوضح مبنية على الموضوعات الظاهرة في المنهج بدل صور عامة غير مرتبطة.</div>
+            <div class="tip panel-note" id="coverTip3">مراجعة نظرية + تطبيق عملي + اختبار سريع في صفحة واحدة.</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="stats">
+      <div class="card stat"><strong id="statValue1">637</strong><span id="stat1">صفحة مفهرسة من الملف.</span></div>
+      <div class="card stat"><strong id="statValue2">9</strong><span id="stat2">أبواب رئيسية في الفهرس.</span></div>
+      <div class="card stat"><strong id="statValue3">637</strong><span id="stat3">شرائح قابلة للبحث والمعاينة.</span></div>
+      <div class="card stat"><strong id="statValue4">8</strong><span id="stat4">طبقات مراجعة سريعة أسفل الفهرس.</span></div>
+    </div>
+
+    <section id="curriculumExplorer">
+      <div class="head">
+        <div>
+          <h2 id="explorerHead">المنهج الكامل</h2>
+          <p id="explorerDesc">فهرس قابل للبحث مبني على الصفحات المستخرجة من الملف نفسه، مع أبواب رئيسية وتفاصيل لكل شريحة.</p>
+        </div>
+        <div class="explorer-stats">
+          <div class="card mini-stat"><strong id="explorerPagesValue">637</strong><span id="explorerPagesLabel">صفحة مفهرسة</span></div>
+          <div class="card mini-stat"><strong id="explorerChaptersValue">9</strong><span id="explorerChaptersLabel">أبواب رئيسية</span></div>
+          <div class="card mini-stat"><strong id="explorerResultsValue">0</strong><span id="explorerResultsLabel">نتيجة معروضة</span></div>
+        </div>
+      </div>
+      <div class="explorer-layout">
+        <div class="tips explorer-filters">
+          <label class="search-wrap" for="curriculumSearch">
+            <span id="explorerSearchLabel">ابحث بعنوان، مصطلح، أو نص داخل الشرائح</span>
+            <input id="curriculumSearch" type="search" placeholder="مثال: epithelial, cartilage, osteoblast, lymphocyte" autocomplete="off">
+          </label>
+          <div class="filter-row">
+            <button class="btn ghost" id="clearExplorerSearch" type="button">مسح البحث</button>
+          </div>
+          <div class="chapter-pills" id="chapterPills"></div>
+          <div class="chapter-list" id="chapterList"></div>
+        </div>
+        <div class="module-wrap explorer-main">
+          <div class="slide-grid" id="slideGrid"></div>
+          <div class="detail slide-detail explorer-preview">
+            <div class="explorer-status">
+              <strong id="explorerStatus">يعرض 0 شريحة</strong>
+              <span class="chip" id="explorerSelection">المنهج الكامل</span>
+            </div>
+            <div class="slide-detail-top">
+              <div class="badge" id="slideDetailChapter">الفصل</div>
+              <div class="chip" id="slideDetailPage">صفحة 1</div>
+            </div>
+            <h3 id="slideDetailTitle" style="margin-top:2px;"></h3>
+            <div class="slide-detail-body">
+              <div class="detail-section">
+                <div class="detail-section-label" id="slideSummaryLabel">ملخص السلايد</div>
+                <p id="slideDetailPreview" style="margin:0;"></p>
+              </div>
+              <div class="detail-section" id="slideVisualWrap" hidden>
+                <div class="detail-section-label" id="slideImageLabel">معاينة مرئية</div>
+                <div class="slide-visual">
+                  <img id="slideDetailImage" alt="" loading="lazy">
+                </div>
+              </div>
+              <div class="detail-section">
+                <div class="detail-section-label" id="slideExcerptLabel">المحتوى المستخرج</div>
+                <ul class="excerpt-list" id="slideDetailExcerpt"></ul>
+              </div>
+            </div>
+            <div class="slide-nav" style="margin-top:4px;">
+              <button class="btn ghost" id="prevSlide" type="button">السابق</button>
+              <button class="btn ghost" id="nextSlide" type="button">التالي</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mindmap">
+      <div class="head">
+        <div>
+          <h2 id="mindmapHead">الخريطة الذهنية</h2>
+          <p id="mindmapDesc">نظرة سريعة على تفرعات المنهج من المركز إلى الوحدات الرئيسية. اضغط على أي فرع لفتح الوحدة المطابقة.</p>
+        </div>
+      </div>
+      <div class="mindmap-shell">
+        <div class="mindmap-core">
+          <div class="badge" id="mindmapBadge">الصورة الكبرى</div>
+          <h3 id="mindmapCoreTitle">الهستولوجي</h3>
+          <p id="mindmapCoreDesc">من الخلية إلى الأنسجة، ومن التقنيات المجهرية إلى قراءة الشرائح وفهم البنية النسيجية.</p>
+        </div>
+        <div class="mindmap-tree">
+          <div class="mindmap-row top" id="mindmapTopRow"></div>
+          <div class="mindmap-row bottom" id="mindmapBottomRow"></div>
+        </div>
+      </div>
+      <div class="mindmap-hint" id="mindmapHint">اختيار أي فرع هنا سيحدد الوحدة نفسها في قسم وحدات المنهج بالأسفل.</div>
+    </section>
+
+    <section id="modules">
+      <div class="head">
+        <div>
+          <h2 id="modulesHead">وحدات المنهج</h2>
+          <p id="modulesDesc">اختر أي محور لتظهر لك نقاط التركيز والكلمات المفتاحية التي تستحق المراجعة.</p>
+        </div>
+      </div>
+      <div class="module-wrap">
+        <div class="module-list" id="moduleList"></div>
+        <div class="detail">
+          <div class="badge" id="moduleTag">محور دراسي</div>
+          <h3 id="moduleTitle"></h3>
+          <p id="moduleSummary"></p>
+          <div id="moduleKeywords" style="margin-top:14px;"></div>
+          <div class="focus" id="moduleFocus"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="compareLab">
+      <div class="head">
+        <div>
+          <h2 id="compareHead">مختبر المقارنة</h2>
+          <p id="compareDesc">اختر مسار مقارنة ثم عنصرين، وستظهر الفروق العالية العائد التي تختصر الحفظ وتمنع الخلط.</p>
+        </div>
+      </div>
+      <div class="compare-shell">
+        <div class="compare-groups" id="compareGroupTabs"></div>
+        <div class="compare-selects">
+          <label class="search-wrap" for="compareLeft">
+            <span id="compareLeftLabel">العنصر الأول</span>
+            <select id="compareLeft"></select>
+          </label>
+          <label class="search-wrap" for="compareRight">
+            <span id="compareRightLabel">العنصر الثاني</span>
+            <select id="compareRight"></select>
+          </label>
+        </div>
+        <div class="card" id="compareIntro"></div>
+        <div class="compare-panel" id="comparePanel"></div>
+        <div class="card">
+          <h3 id="compareFocusHead">ما الذي تلتقطه العين سريعًا؟</h3>
+          <div class="tips-list" id="compareFocusList" style="margin-top:14px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="classifier">
+      <div class="head">
+        <div>
+          <h2 id="classifierHead">شجرة قرار الظهارة</h2>
+          <p id="classifierDesc">جاوب خطوة خطوة كما لو أنك تقرأ شريحة تحت المجهر، وسيقودك المسار إلى أقرب تصنيف.</p>
+        </div>
+        <button class="btn ghost" id="resetClassifier" type="button">إعادة الشجرة</button>
+      </div>
+      <div class="classifier-shell">
+        <div class="quiz-box">
+          <div class="badge" id="classifierStep">الخطوة 1</div>
+          <h3 id="classifierPrompt" style="margin-top:12px;"></h3>
+          <div class="options" id="classifierOptions"></div>
+        </div>
+        <div class="tips">
+          <h3 id="classifierPathHead">المسار الحالي</h3>
+          <div class="classifier-path" id="classifierPath" style="margin-top:14px;"></div>
+          <div class="result-box" id="classifierResultBox">
+            <div class="badge" id="classifierResultBadge">التصنيف الأقرب</div>
+            <h3 id="classifierResultTitle" style="margin-top:12px;"></h3>
+            <div id="classifierResultContent"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="head">
+        <div>
+          <h2 id="galleryHead">بنك الصور</h2>
+          <p id="galleryDesc">رسومات تعليمية أوضح ومبنية على العناوين التي ظهرت في المنهج: الخلية، المجهر، تحضير الأنسجة، الظهاري، الغدد، والتخصصات القمية.</p>
+        </div>
+      </div>
+      <div class="gallery-stack">
+        <div class="gallery-subhead">
+          <h3 id="syllabusGalleryHead">صور من سلايدات المنهج</h3>
+          <p id="syllabusGalleryDesc">مقتطفات مرئية مستخرجة من الـ PDF نفسه، مرتبة حسب الأبواب حتى ترى الرسومات والمخططات الأصلية التي ظهرت في السلايدات.</p>
+        </div>
+        <div class="gallery-filter-row" id="syllabusGalleryFilters"></div>
+        <div class="gallery-grid" id="syllabusGalleryGrid"></div>
+        <div class="gallery-subhead">
+          <h3 id="diagramGalleryHead">رسومات تعليمية</h3>
+          <p id="diagramGalleryDesc">هذه الرسومات صُممت لتقريب الفكرة بسرعة وتبسيط المقارنات الأساسية.</p>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <div class="gallery-subhead">
+          <h3 id="realGalleryHead">شرائح حقيقية</h3>
+          <p id="realGalleryDesc">صور هستولوجي حقيقية من مصادر تعليمية عامة، مضافة كأمثلة أوضح داخل نفس الموضوعات.</p>
+        </div>
+        <div class="gallery-grid" id="realGalleryGrid"></div>
+      </div>
+    </section>
+
+    <section id="lab">
+      <div class="head">
+        <div>
+          <h2 id="labHead">محاكاة سير العينة</h2>
+          <p id="labDesc">تدريب سريع على التسلسل المختبري الذي يبدأ بالعينة وينتهي بالشريحة الجاهزة تحت المجهر.</p>
+        </div>
+      </div>
+      <div class="lab-wrap">
+        <div class="quiz-box">
+          <div class="badge" id="simBadge">حالة تدريبية: عينة نسيجية روتينية</div>
+          <div class="detail-section" style="margin-top:12px;">
+            <div class="detail-section-label" id="simCaseHead">ملف الحالة</div>
+            <h3 id="simCaseTitle" style="margin:0;"></h3>
+            <p id="simCaseSummary" style="margin:0;"></p>
+            <div class="focus" id="simCaseFacts"></div>
+          </div>
+          <div class="detail-section" style="margin-top:14px;">
+            <div class="badge" id="simStageBadge">المحطة الحالية</div>
+            <h3 id="simTitle" style="margin:0;"></h3>
+            <p id="simPrompt" style="margin:0;"></p>
+            <div class="focus" id="simStepNotes"></div>
+          </div>
+          <div class="steps" id="simSteps"></div>
+          <div class="options" id="simOptions"></div>
+          <div class="feedback" id="simFeedback" style="margin-top:12px; min-height:26px;"></div>
+          <div class="bar"><span id="simBar"></span></div>
+          <div class="flash-actions">
+            <button class="btn ghost" id="resetSim" type="button">إعادة المحاولة</button>
+          </div>
+        </div>
+        <div class="tips">
+          <h3 id="labTipsHead">تذكير مهم</h3>
+          <div class="tips-list" style="margin-top:14px;">
+            <div class="tip" id="labTip1"></div>
+            <div class="tip" id="labTip2"></div>
+            <div class="tip" id="labTip3"></div>
+            <div class="tip" id="labTip4"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="review">
+      <div class="head">
+        <div>
+          <h2 id="reviewHead">بطاقات مراجعة</h2>
+          <p id="reviewDesc">أسئلة قصيرة من قلب المنهج لتثبيت الأفكار الكبرى بسرعة.</p>
+        </div>
+      </div>
+      <div class="review-wrap">
+        <div class="flash-box">
+          <div class="flash-toolbar">
+            <div class="flash-status">
+              <strong id="flashStatus">يعرض 0 بطاقة</strong>
+              <span class="chip" id="flashSelection">كل الأبواب</span>
+            </div>
+            <div class="chapter-pills" id="flashChapterPills"></div>
+          </div>
+          <div class="flash-card">
+            <div class="flash-meta" id="flashMeta"></div>
+            <div class="flash-face" id="flashFace"></div>
+          </div>
+          <div class="flash-actions">
+            <button class="btn ghost" id="prevFlash" type="button">السابق</button>
+            <button class="btn primary" id="flipFlash" type="button">اقلب البطاقة</button>
+            <button class="btn ghost" id="nextFlash" type="button">التالي</button>
+            <button class="btn ghost" id="shuffleFlash" type="button">عشوائي</button>
+          </div>
+        </div>
+        <div class="tips">
+          <h3 id="reviewTipsHead">طريقة الاستخدام</h3>
+          <div class="tips-list" style="margin-top:14px;">
+            <div class="tip" id="reviewTip1"></div>
+            <div class="tip" id="reviewTip2"></div>
+            <div class="tip" id="reviewTip3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <div class="head">
+        <div>
+          <h2 id="quizHead">اختبار سريع</h2>
+          <p id="quizDesc">أسئلة قصيرة من محاور الخلية، المجهر، تجهيز الأنسجة، والأنسجة الظهارية.</p>
+        </div>
+      </div>
+      <div class="quiz-box">
+        <div class="flash-toolbar">
+          <div class="flash-status">
+            <strong id="quizStatus">اختبار من 0 أسئلة</strong>
+            <span class="chip" id="quizSelection">كل الأبواب</span>
+          </div>
+          <div class="chapter-pills" id="quizChapterPills"></div>
+        </div>
+        <div class="quiz-list" id="quizList"></div>
+        <div class="quiz-actions">
+          <button class="btn primary" id="gradeQuiz" type="button">احسب الدرجة</button>
+          <button class="btn ghost" id="resetQuiz" type="button">إعادة الاختبار</button>
+          <button class="btn ghost" id="shuffleQuiz" type="button">مجموعة جديدة</button>
+        </div>
+        <div class="quiz-result" id="quizResult"></div>
+      </div>
+    </section>
+
+    <footer id="footerText">يمكن توسيع هذه الصفحة لاحقًا بإضافة صور شرائح حقيقية أو بنك أسئلة أكبر حسب بقية المنهج.</footer>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-panel">
+      <div class="lightbox-top">
+        <strong id="lightboxTitle"></strong>
+        <button class="lightbox-close" id="lightboxClose" type="button">إغلاق</button>
+      </div>
+      <img class="lightbox-image" id="lightboxImage" alt="">
+    </div>
+  </div>
+
+  <script src="histology_curriculum_data.js"></script>
+  <script src="histology_flashcards_data.js"></script>
+  <script src="histology_curriculum_studio.js"></script>
+</body>
+</html>
