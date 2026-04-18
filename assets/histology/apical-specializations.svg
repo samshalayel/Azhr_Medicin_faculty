@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-label="Apical specializations diagram">
+  <rect width="960" height="640" fill="#f6f1e8"/>
+  <g fill="#fffdf8" stroke="#145b62" stroke-width="10">
+    <rect x="70" y="86" width="250" height="468" rx="28"/>
+    <rect x="356" y="86" width="250" height="468" rx="28"/>
+    <rect x="642" y="86" width="250" height="468" rx="28"/>
+  </g>
+  <g fill="#9ed1d6" stroke="#145b62" stroke-width="8">
+    <rect x="122" y="250" width="146" height="214" rx="22"/>
+    <rect x="408" y="250" width="146" height="214" rx="22"/>
+    <rect x="694" y="250" width="146" height="214" rx="22"/>
+  </g>
+  <g fill="#145b62">
+    <rect x="116" y="466" width="158" height="20" rx="10"/>
+    <rect x="402" y="466" width="158" height="20" rx="10"/>
+    <rect x="688" y="466" width="158" height="20" rx="10"/>
+  </g>
+  <g stroke="#df7c60" stroke-width="8" stroke-linecap="round">
+    <path d="M134 250v-56"/><path d="M148 250v-56"/><path d="M162 250v-56"/><path d="M176 250v-56"/><path d="M190 250v-56"/><path d="M204 250v-56"/><path d="M218 250v-56"/><path d="M232 250v-56"/><path d="M246 250v-56"/><path d="M260 250v-56"/>
+    <path d="M422 250v-96"/><path d="M440 250v-96"/><path d="M458 250v-96"/><path d="M476 250v-96"/><path d="M494 250v-96"/><path d="M512 250v-96"/><path d="M530 250v-96"/>
+    <path d="M722 250c0-56 6-100 18-132"/>
+    <path d="M758 250c0-66 8-116 20-146"/>
+    <path d="M794 250c0-76 12-132 28-168"/>
+  </g>
+  <g fill="#f1bc71">
+    <circle cx="722" cy="110" r="10"/><circle cx="758" cy="96" r="10"/><circle cx="794" cy="82" r="10"/>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-label="Gland secretion and arrangement diagram">
+  <rect width="960" height="640" fill="#f6f1e8"/>
+  <g fill="#fffdf8" stroke="#145b62" stroke-width="10">
+    <rect x="86" y="92" width="246" height="456" rx="28"/>
+    <rect x="358" y="92" width="246" height="456" rx="28"/>
+    <rect x="630" y="92" width="246" height="456" rx="28"/>
+  </g>
+  <g fill="#9ed1d6" stroke="#145b62" stroke-width="8">
+    <circle cx="208" cy="238" r="76"/>
+    <circle cx="480" cy="238" r="76"/>
+    <circle cx="752" cy="238" r="76"/>
+  </g>
+  <g stroke="#145b62" stroke-width="12" stroke-linecap="round">
+    <path d="M208 316v112"/>
+    <path d="M480 316v112"/>
+    <path d="M752 316v112"/>
+  </g>
+  <g fill="#145b62">
+    <circle cx="208" cy="440" r="22"/>
+    <circle cx="480" cy="440" r="22"/>
+    <circle cx="752" cy="440" r="22"/>
+  </g>
+  <g fill="#df7c60">
+    <circle cx="172" cy="224" r="12"/><circle cx="208" cy="198" r="12"/><circle cx="246" cy="226" r="12"/>
+    <circle cx="444" cy="224" r="12"/><circle cx="480" cy="198" r="12"/><circle cx="518" cy="226" r="12"/>
+    <circle cx="716" cy="224" r="12"/><circle cx="752" cy="198" r="12"/><circle cx="790" cy="226" r="12"/>
+  </g>
+  <g fill="none" stroke="#7ac3a6" stroke-width="8" stroke-linecap="round">
+    <path d="M208 140c0-34 24-52 50-52"/>
+    <path d="M480 140c0-34-24-52-50-52"/>
+    <path d="M752 140c0-34 26-52 54-52"/>
+  </g>
+  <g fill="#f1bc71" opacity=".9">
+    <circle cx="258" cy="88" r="12"/>
+    <circle cx="430" cy="88" r="12"/>
+    <circle cx="806" cy="88" r="12"/>
+  </g>
+  <g fill="#7ac3a6" stroke="#1f7969" stroke-width="8">
+    <rect x="160" y="364" width="96" height="32" rx="16"/>
+    <path d="M430 366c32 8 68 8 100 0v30c-32 12-68 12-100 0z"/>
+    <path d="M706 352h92l-12 28h-68z"/>
+  </g>
+</svg>

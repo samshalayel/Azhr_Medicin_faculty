@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-label="Tissue preparation workflow diagram">
+  <rect width="960" height="640" fill="#f6f1e8"/>
+  <g fill="#fffdf8" stroke="#145b62" stroke-width="10">
+    <rect x="76" y="184" width="170" height="170" rx="28"/>
+    <rect x="292" y="184" width="170" height="170" rx="28"/>
+    <rect x="508" y="184" width="170" height="170" rx="28"/>
+    <rect x="724" y="184" width="170" height="170" rx="28"/>
+  </g>
+  <g fill="none" stroke="#145b62" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M246 270h44"/>
+    <path d="M462 270h44"/>
+    <path d="M678 270h44"/>
+    <path d="M274 246l22 24-22 24"/>
+    <path d="M490 246l22 24-22 24"/>
+    <path d="M706 246l22 24-22 24"/>
+  </g>
+  <g transform="translate(110 214)">
+    <rect x="18" y="18" width="58" height="102" rx="16" fill="#8dc6ce" stroke="#145b62" stroke-width="8"/>
+    <rect x="30" y="0" width="34" height="30" rx="10" fill="#df7c60"/>
+    <path d="M44 52c0 10 16 14 16 30s-12 22-12 36" fill="none" stroke="#f7d2c1" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(328 214)">
+    <rect x="24" y="28" width="82" height="84" rx="10" fill="#f1bc71" stroke="#915b19" stroke-width="8"/>
+    <rect x="42" y="44" width="46" height="40" rx="8" fill="#f7d2c1"/>
+    <rect x="20" y="18" width="90" height="10" fill="#915b19" opacity=".45"/>
+  </g>
+  <g transform="translate(544 214)">
+    <rect x="12" y="18" width="94" height="24" rx="10" fill="#c7d6d8"/>
+    <rect x="52" y="42" width="14" height="82" rx="6" fill="#7d8d90"/>
+    <polygon points="30,124 88,124 72,154 46,154" fill="#4c5b5e"/>
+    <rect x="18" y="154" width="82" height="14" rx="7" fill="#145b62"/>
+  </g>
+  <g transform="translate(760 214)">
+    <rect x="18" y="20" width="92" height="78" rx="14" fill="#ffffff" stroke="#c6d2d5" stroke-width="6"/>
+    <path d="M32 50c18-18 36-18 54 0s36 18 42 0" fill="none" stroke="#7ac3a6" stroke-width="8" stroke-linecap="round"/>
+    <path d="M30 72c20-18 40-18 60 0s26 18 34 0" fill="none" stroke="#df7c60" stroke-width="8" stroke-linecap="round"/>
+    <rect x="40" y="108" width="50" height="12" rx="6" fill="#145b62"/>
+  </g>
+  <g fill="#145b62">
+    <circle cx="160" cy="430" r="14"/><circle cx="376" cy="430" r="14"/><circle cx="592" cy="430" r="14"/><circle cx="808" cy="430" r="14"/>
+  </g>
+</svg>
